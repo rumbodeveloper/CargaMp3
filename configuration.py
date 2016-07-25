@@ -7,7 +7,7 @@
 
 
 
-SOURCE_DIRECTORY = "/Volumes/Public/Shared Music/musica"
+SOURCE_DIRECTORY = "/Volumes/Public/Shared Music/musica/accentus"
 TARGET_DIRECTORY="/Volumes/WALKMAN/MUSIC"
 
 SONGS_NAMES_FILE= "songfiles.json"
@@ -17,3 +17,4 @@ MAX_TO_LOAD = 15
 
 RATE_FROM_BYTES_TO_GIGABYTES = 1073741824
 
+INITIAL_BUFFER_SIZE = 10485760

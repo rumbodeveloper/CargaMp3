@@ -45,7 +45,7 @@ def load_files(list_of_files):
 
     for i in list_of_files:
         volumen_copiado = volumen_copiado + i[1]/RATE_FROM_BYTES_TO_GIGABYTES # voy sumando el volumen
-        if not _copia_fichero(i[0]): #aqui le decimos que copie el fichero
+        if not _copia_fichero(i[0],i[1]): #aqui le decimos que copie el fichero
             show_error("Problema con el fichero {}, no se pudo copiar".format(i[0]))
         else:
             ficheros_copiados += 1
@@ -72,7 +72,7 @@ def _connected(devicepath):
         return False
     return True
 
-def _copia_fichero(fichero):
+def _copia_fichero(fichero,volumen):
     """
     esta funcion copia ficheros individuales
     """
@@ -81,10 +81,10 @@ def _copia_fichero(fichero):
     try:
         if not os.path.exists(os.path.dirname(destino)):
             os.makedirs(os.path.dirname(destino))
+        buffer_size = min(volumen,INITIAL_BUFFER_SIZE)
         with open(target, 'rb') as fsrc:
             with open(destino, 'wb') as fdst:
-                for x in iter(lambda: fsrc.read(16384), ""):
-                    fdst.write(x)
+                shutil.copyfileobj(fsrc,fdst,length=buffer_size)
 
         return True
     except:

@@ -43,7 +43,7 @@ def show_options(opciones,prompt, pregunta):
     '''
     if type(pregunta) is str:
         print(pregunta.capitalize(),'\n',)
-    [print(i[0],'\t',i[1]) for i in opciones]
+    [print("{} : {}".format(i[1],i[0])) for i in opciones]
     valores = [str(i[1]) for i in opciones]
     while True:
         valor = input(prompt)
