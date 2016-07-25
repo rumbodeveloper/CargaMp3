@@ -81,7 +81,11 @@ def _copia_fichero(fichero):
     try:
         if not os.path.exists(os.path.dirname(destino)):
             os.makedirs(os.path.dirname(destino))
-        shutil.copyfile(target, destino)
+        with open(target, 'rb') as fsrc:
+            with open(destino, 'wb') as fdst:
+                for x in iter(lambda: fsrc.read(16384), ""):
+                    fdst.write(x)
+
         return True
     except:
         return False
