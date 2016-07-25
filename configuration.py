@@ -7,7 +7,7 @@
 
 
 
-SOURCE_DIRECTORY = "/Volumes/Public/Shared Music/musica/accentus"
+SOURCE_DIRECTORY = "/Volumes/Public/Shared Music/musica"
 TARGET_DIRECTORY="/Volumes/WALKMAN/MUSIC"
 
 SONGS_NAMES_FILE= "songfiles.json"
