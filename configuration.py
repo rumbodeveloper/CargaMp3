@@ -10,7 +10,7 @@
 SOURCE_DIRECTORY = "/Volumes/Public/Shared Music/musica"
 TARGET_DIRECTORY="/Volumes/WALKMAN/MUSIC"
 
-SONGS_NAMES_FILE= "songfiles.json"
+SONGS_NAMES_FILE= "~/songfiles.json"
 
 MIN_TO_LOAD = 0
 MAX_TO_LOAD = 15

@@ -21,9 +21,11 @@ def init():
     global _songs_dict #inicializamos la variable donde van los nombres de los ficheros
 
     if not os.path.exists(SONGS_NAMES_FILE): #si no existe el fichero lo creo
+        print("No existe fichero de canciones - lo creo")
         update_songs()
 
     with open(SONGS_NAMES_FILE, "r") as file: # y si existe lo cargo
+        print("Existe el fichero de canciones - lo cargo")
         _songs_dict = json.loads(file.read())
 
 
