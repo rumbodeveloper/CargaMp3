@@ -26,15 +26,19 @@ def update_songs():
     '''
 
 
-    files = []# lista inicial
+    all_files = []# lista inicial
 
     for path, dir, listfiles in os.walk(SOURCE_DIRECTORY): #escaneo el directorio
-        files = files + \
-                [(os.path.join(path,f), os.path.getsize(os.path.join(path,f)))
+        file_list=[(os.path.join(path,f), os.path.getsize(os.path.join(path,f)))
                  for f in listfiles if f.endswith('.mp3')]
-        show_message("Agregados {} ficheros".format(len(files)))
 
-    canciones = {k: f for k, f in enumerate(files)} #creo un diccionario
+        if not file_list: # para no procesar nada si la lista obtenida esta vacia
+            continue
+
+        all_files = all_files + file_list
+        show_message("Agregados {} ficheros".format(len(all_files)))
+
+    canciones = {k: f for k, f in enumerate(all_files)} #creo un diccionario
     show_message("Creado un diccionario con los ficheros")
     try:
         with open (SONGS_NAMES_FILE,"w")as file:
