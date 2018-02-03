@@ -9,6 +9,7 @@
 
 SOURCE_DIRECTORY = "/Volumes/Public/Shared Music/musica"
 TARGET_DIRECTORY="/Volumes/WALKMAN/MUSIC"
+#TARGET_DIRECTORY="/Volumes/NO NAME/Musica"
 
 SONGS_NAMES_FILE= "/Users/Angel_Luis/songfiles.json"
 
