@@ -25,24 +25,42 @@ def update_songs():
 
     '''
 
+    global _songs_dict
+    _songs_dict={}
 
-    all_files = []# lista inicial
+    # detecto si esta el fichero y si esta lo cargo
+
+    try:
+        with open(SONGS_NAMES_FILE, "r") as file: # y si existe lo cargo
+            print("Existe el fichero de canciones - lo cargo")
+            _songs_dict = json.loads(file.read())
+            print("Tiene {} canciones. ".format(len(_songs_dict)))
+    except:
+        pass
+
+    contador_canciones_nuevas = 0
+    contador_actividad = 0
+
+    canciones_existentes=list( _songs_dict.keys())
+    print("numero de claves en el diccionario: {}".format(len(set(_songs_dict.keys()))))
+
 
     for path, dir, listfiles in os.walk(SOURCE_DIRECTORY): #escaneo el directorio
-        file_list=[(os.path.join(path,f), os.path.getsize(os.path.join(path,f)))
-                 for f in listfiles if f.endswith('.mp3')]
+        contador_actividad += 1
+        print("Scaneando: actividad {}".format(contador_actividad))
+        for f in listfiles:
+            if f.endswith('.mp3'):
+                fichero_y_su_path=os.path.join(path,f)
+                if  not fichero_y_su_path in canciones_existentes:
+                    contador_canciones_nuevas += 1
+                    canciones_existentes.append(fichero_y_su_path)
+                    _songs_dict[fichero_y_su_path]=(fichero_y_su_path, os.path.getsize(fichero_y_su_path))
+                    show_message("Agregadas {} canciones".format(contador_canciones_nuevas))
 
-        if not file_list: # para no procesar nada si la lista obtenida esta vacia
-            continue
-
-        all_files = all_files + file_list
-        show_message("Agregados {} ficheros".format(len(all_files)))
-
-    canciones = {k: f for k, f in enumerate(all_files)} #creo un diccionario
-    show_message("Creado un diccionario con los ficheros")
+    show_message("Actualizado  un diccionario con los ficheros")
     try:
         with open (SONGS_NAMES_FILE,"w")as file:
-            file.write(json.dumps(canciones))
+            file.write(json.dumps(_songs_dict))
             show_message("PROCESO DE ACTUALIZACION TERMINADO \n")
     except:
         show_error("Algo fallo guardando el fichero con los datos de los ficheros")
