@@ -92,4 +92,4 @@ ENV/
 .ropeproject
 
 # jsonfiles
-songfiles.json
+test_data/songfiles.json
